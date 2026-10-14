@@ -27,7 +27,7 @@ npm run preview -- --port 4173
 - Histórico de resultados de simulados por matéria.
 - Exportação e importação de backup JSON em Configurações.
 
-Os dados são armazenados no `localStorage` do navegador, sem backend ou conta. Não são sincronizados entre dispositivos e podem ser perdidos se os dados do navegador forem apagados. Exporte backups regularmente. Importar um backup substitui os registros atuais.
+O app suporta banco PostgreSQL e login via Supabase. Consulte [Ativar banco e login](docs/SUPABASE.md) para criar o projeto, executar o SQL e configurar a Vercel. Sem essa configuração, os dados continuam apenas no `localStorage` do navegador. No modo conectado, cada conta tem seus próprios registros e o app mantém uma cópia local por usuário para preservar alterações pendentes. Exporte backups regularmente. Importar um backup substitui os registros atuais.
 
 As matérias iniciais são sugestões editáveis; nenhuma sessão ou resultado fictício é incluído. Ao concluir um agendamento, informe o tempo, as questões e os acertos: o resultado é registrado automaticamente no desempenho, sem precisar registrar a mesma sessão novamente.
 
