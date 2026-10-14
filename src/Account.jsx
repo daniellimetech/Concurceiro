@@ -70,7 +70,7 @@ function CloudWorkspace({user,App}) {
   }catch(err){if(active.current&&request===loadId.current){setError('Não foi possível carregar seus estudos do banco. Confira sua conexão. Se for a primeira configuração, verifique se o script SQL foi executado no Supabase.');setPhase('error')}}
  }
  useEffect(()=>{active.current=true;void load();const online=()=>writer.current?.retry();window.addEventListener('online',online);return()=>{active.current=false;loadId.current++;writer.current?.dispose();window.removeEventListener('online',online)}},[]);
- async function logout(){setLogoutError('');const {error}=await supabase.auth.signOut();if(error)setLogoutError('Não foi possível sair. Tente novamente.');}
+ async function logout(){setLogoutError('');try{const {error}=await supabase.auth.signOut({scope:'local'});if(error)throw error}catch{setLogoutError('Não foi possível sair. Tente novamente.');}}
  function useServer() {
   const cached=readCache(localStorage,user.id);
   if(cached?.pending&&!window.confirm('Há mudanças deste dispositivo que ainda não estão no banco. Exporte a cópia local antes de continuar. Carregar a versão do banco agora?'))return;
