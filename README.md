@@ -56,3 +56,14 @@ npm test
 ```
 
 Os testes de lógica cobrem geração proporcional, horários, preservação de registros, repetição de geração/conclusão, encadeamento com atraso real, fim de semana, capacidade da hora de revisões, fuso horário e validação dos resultados.
+
+## Cronômetro e timer
+
+A aba **Foco** tem dois controles independentes, que podem ser usados ao mesmo tempo:
+
+- **Cronômetro:** mede o tempo efetivamente estudado, descontando pausas. Escolha a matéria antes de iniciar. Use **Salvar tempo estudado** para registrar o resultado; nada é somado automaticamente só por deixar o relógio rodar. O registro guarda segundos inteiros em `durationSeconds` e minutos proporcionais em `minutes`, preservando a precisão do desempenho.
+- **Timer:** regressivo de 1 a 180 minutos, com atalhos e aviso sonoro opcional. Serve exclusivamente como alerta; não salva sessões, não soma horas, não para o cronômetro e não conclui agendamentos. O aviso visual aparece ao terminar; a execução do som depende do navegador.
+
+No cronograma, o ícone de relógio abre o cronômetro vinculado àquela atividade. **Salvar tempo e concluir estudo** registra o tempo medido e conclui o agendamento em uma única atualização, gerando somente a próxima revisão. A conclusão nunca é automática. Se preferir apenas medir uma sessão avulsa, desvincule-a antes de salvar.
+
+As contagens em andamento ficam neste navegador, separadas por conta, e sobrevivem à navegação e ao recarregamento. O cronômetro tem limite de 24 horas por sessão. A contagem usa horários de início/pausa, sem depender da frequência dos intervalos do navegador. Pause antes de interromper o estudo. Somente os resultados salvos são sincronizados pelo Supabase; não há sincronização de relógios em andamento entre dispositivos. Não é necessário executar novo SQL para usar esta funcionalidade.
