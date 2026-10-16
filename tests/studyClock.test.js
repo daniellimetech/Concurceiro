@@ -29,3 +29,11 @@ test('linked stopwatch concludes only on save, creates one successor, and preser
  assert.equal(result.schedule.length,2);assert.equal(result.schedule[1].stage,'review24');assert.equal(result.schedule[0].done,true);assert.equal(result.sessions[0].durationSeconds,61);assert.equal(result.sessions[0].minutes,61/60);
  assert.equal(saveMeasuredStudy(result,c,{questions:10,correct:7},at),result);
 });
+
+test('linked review accepts actual question count and retains result validation',()=>{
+ const data={...base(),schedule:[{id:'review',subject:'port',stage:'review24',title:'Revisão',date:'2026-10-19',time:'17:30',minutes:15}]};
+ const c={...newClock('port'),sourceScheduleId:'review',accumulatedMs:60000};
+ const result=saveMeasuredStudy(data,c,{questions:15,correct:12},at);
+ assert.equal(result.sessions[0].questions,15);assert.equal(result.sessions[0].correct,12);assert.equal(result.schedule[1].stage,'review7');
+ assert.throws(()=>saveMeasuredStudy(data,c,{questions:5,correct:6},at));
+});

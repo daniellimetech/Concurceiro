@@ -56,7 +56,6 @@ export function completeEntry(data,id,result,now=new Date(),makeId=uid) {
  if(parent?.completedAt&&completedAt<new Date(parent.completedAt))throw Error('A conclusão não pode ser anterior à etapa precedente.');
  const minutes=Number(result.minutes),questions=Number(result.questions),correct=Number(result.correct);
  if(!Number.isInteger(minutes)||minutes<1||minutes>1440||!Number.isInteger(questions)||questions<0||!Number.isInteger(correct)||correct<0||correct>questions)throw Error('Confira a duração, as questões e os acertos.');
- if(entry.stage?.startsWith('review')&&questions!==10)throw Error('Cada revisão deve ter exatamente 10 questões.');
  const done={...entry,done:true,completedAt:completedAt.toISOString(),topic:result.topic?.trim()||entry.topic||entry.title};
  const schedule=data.schedule.map(s=>s.id===id?done:s);
  const next=schedule.some(s=>s.parentId===id)?null:nextReview(done,completedAt,schedule,{...DEFAULT_ROUTINE,...data.routine},makeId);

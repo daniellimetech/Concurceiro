@@ -61,7 +61,8 @@ test('invalid performance, future completions, and invalid chain ordering cannot
  assert.throws(()=>completeEntry(data,'lesson',outcome(actual('2028-01-01')),now));assert.equal(data.schedule.length,1);
  const done=completeEntry(data,'lesson',outcome(actual()),now),review=done.schedule[1];
  assert.throws(()=>completeEntry(done,review.id,outcome(actual('2026-10-18')),now));
- assert.throws(()=>completeEntry(done,review.id,{...outcome(actual('2026-10-20')),questions:9},now));
+ const edited=completeEntry(done,review.id,{...outcome(actual('2026-10-20')),questions:9},now);assert.equal(edited.sessions.at(-1).questions,9);assert.equal(edited.schedule.at(-1).stage,'review7');
+ assert.throws(()=>completeEntry(done,review.id,{...outcome(actual('2026-10-20')),questions:7,correct:8},now));
 });
 test('manual events reserve space; unrelated subjects and historical data remain intact',()=>{
  const data={...base(),schedule:[{...lesson,id:'manual',stage:'manual',minutes:60}],sessions:[{id:'old'}]};
