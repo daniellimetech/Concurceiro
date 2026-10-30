@@ -56,3 +56,5 @@ function App({cloud}){
  </div>
 }
 createRoot(document.getElementById('root')).render(<AccountRoot App={App}/>);
+
+if(import.meta.env.PROD&&'serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{/* O app continua funcionando no navegador. */})})}

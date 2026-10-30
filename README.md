@@ -67,3 +67,9 @@ A aba **Foco** tem dois controles independentes, que podem ser usados ao mesmo t
 No cronograma, o ícone de relógio abre o cronômetro vinculado àquela atividade. **Salvar tempo e concluir estudo** registra o tempo medido e conclui o agendamento em uma única atualização, gerando somente a próxima revisão. A conclusão nunca é automática. Se preferir apenas medir uma sessão avulsa, desvincule-a antes de salvar.
 
 As contagens em andamento ficam neste navegador, separadas por conta, e sobrevivem à navegação e ao recarregamento. O cronômetro tem limite de 24 horas por sessão. A contagem usa horários de início/pausa, sem depender da frequência dos intervalos do navegador. Pause antes de interromper o estudo. Somente os resultados salvos são sincronizados pelo Supabase; não há sincronização de relógios em andamento entre dispositivos. Não é necessário executar novo SQL para usar esta funcionalidade.
+
+## Instalar no celular ou tablet
+
+O app inclui manifesto de instalação, ícones Android de 192/512 pixels, ícone adaptável e suporte a abertura em janela própria. Após publicar, abra o endereço HTTPS no Chrome e use **⋮ → Instalar e criar atalho → Instalar**. A opção **Criar atalho** também permite adicionar um acesso à tela inicial. No iPhone/iPad, use Safari → Compartilhar → Adicionar à Tela de Início.
+
+O service worker não guarda páginas autenticadas, respostas do Supabase ou versões antigas do aplicativo em cache. A instalação não adiciona funcionamento completo sem internet: ao abrir sem conexão, mostra uma tela de reconexão. Os registros locais e alterações pendentes continuam preservados nos mecanismos já existentes.
